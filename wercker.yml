@@ -1,0 +1,16 @@
+name: docker-ansible-environment
+version: 0.0.1
+inherits: wercker-labs/docker
+type: language
+platform: ubuntu@12.04
+description: ansible environments.(docker-enter, centos7, ubuntu 14.04)
+keywords:
+  - docker
+  - ansible
+      script: |
+        mkdir -p $WERCKER_CACHE_DIR/bin ; docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
+        docker pull ansible/centos7-ansible
+        docker pull ansible/ubuntu14.04-ansible
+
+   
+        
