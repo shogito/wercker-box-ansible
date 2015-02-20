@@ -1,4 +1,4 @@
-name: docker-ansible
+name: ansible
 version: 0.0.1
 inherits: wercker-labs/docker
 type: main
@@ -44,4 +44,5 @@ script: |
     # check ubuntu14.04-ansible
     docker run --rm ansible/ubuntu14.04-ansible $ANSIBLE_PATH/ansible-playbook --version
 
-
+env:
+    ANSIBLE_PATH: "/opt/ansible/ansible/bin"
