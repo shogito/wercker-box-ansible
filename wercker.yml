@@ -30,7 +30,7 @@ build:
 
         - script:
             name: check centos7-ansible
-            code: docker run --rm ansible/centos7-ansible $WERCKER_ANSIBLE/ansible-playbook --version
+            code: docker run --rm ansible/centos7-ansible $ANSIBLE_PATH/ansible-playbook --version
 
         - script:
             name: pull ubuntu14.04-ansible
@@ -42,4 +42,4 @@ build:
 
         - script:
             name: check ubuntu14.04-ansible
-            code: docker run --rm ansible/ubuntu14.04-ansible $WERCKER_ANSIBLE/ansible-playbook --version
+            code: docker run --rm ansible/ubuntu14.04-ansible $ANSIBLE_PATH/ansible-playbook --version
