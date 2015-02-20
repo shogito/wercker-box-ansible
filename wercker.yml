@@ -14,7 +14,7 @@ build:
             code: |
                 sudo apt-get update
                 sudo apt-get install python-pip -y
-                sudo pip install ansible -y
+                sudo pip install ansible
 
         - script:
             name: check ansible
