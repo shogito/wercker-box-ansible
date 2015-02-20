@@ -6,8 +6,19 @@ build:
             code: mkdir -p $WERCKER_CACHE_DIR/bin ; docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
 
         - script:
-            name: check install
+            name: check docker-enter
             code: test -x $WERCKER_CACHE_DIR/bin/docker-enter
+
+        - script:
+            name: install ansible to local
+            code: |
+                apt-get update
+                apt-get install python-pip -y
+                pip install ansible -y
+
+        - script:
+            name: check ansible
+            code: ansible-playbook --version
 
         - script:
             name: pull centos7-ansible
