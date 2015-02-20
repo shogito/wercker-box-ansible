@@ -29,9 +29,17 @@ build:
             code: docker images ansible/centos7-ansible | grep "ansible/centos7-ansible"
 
         - script:
+            name: check centos7-ansible
+            code: docker --rm run ansible/centos7-ansible $WERCKER_ANSIBLE/ansible-playbook --version
+
+        - script:
             name: pull ubuntu14.04-ansible
             code: docker pull ansible/ubuntu14.04-ansible
 
         - script:
             name: image check
             code: docker images ansible/ubuntu14.04-ansible | grep "ansible/ubuntu14.04-ansible"
+
+        - script:
+            name: check ubuntu14.04-ansible
+            code: docker --rm run ansible/ubuntu14.04-ansible $WERCKER_ANSIBLE/ansible-playbook --version
