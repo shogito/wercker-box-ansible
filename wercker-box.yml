@@ -1,6 +1,6 @@
 name: ansible
 version: 0.0.1
-inherits: wercker-labs/docker
+inherits: wercker/default
 type: main
 platform: ubuntu@12.04
 description: "A box create to build, test and deploy ansible-playbook"
@@ -13,8 +13,9 @@ keywords:
  
 script: |
     # install docekr
-    sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+    update
     sudo apt-get install apt-transport-https
+    sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
     sudo apt-get update  
     sudo apt-get install lxc-docker
     sudo service docker restart
