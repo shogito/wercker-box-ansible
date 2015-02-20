@@ -1,6 +1,6 @@
 name: ansible
 version: 0.0.1
-inherits: wercker/ubuntu12.04-webessentials@1.0.4
+inherits: jparyani/docker@1.0.1
 type: main
 platform: ubuntu@12.04
 description: "A box create to build, test and deploy ansible-playbook"
@@ -12,10 +12,10 @@ keywords:
     - docker-enter
  
 script: |
-    # install docekr
-    sudo apt-get update
-    sudo apt-get install linux-image-generic-lts-trusty linux-headers-generic-lts-trusty
-    sudo service docker restart
+#    # install docekr
+#    sudo apt-get update
+#    sudo apt-get install linux-image-generic-lts-trusty linux-headers-generic-lts-trusty
+#    sudo service docker restart
     
     # install docker-enter
     mkdir -p $WERCKER_CACHE_DIR/bin ; docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
@@ -24,6 +24,7 @@ script: |
     test -x $WERCKER_CACHE_DIR/bin/docker-enter
 
     # install ansible to local
+    sudo apt-get update
     sudo apt-get install python-pip -y
     sudo pip install ansible
 
