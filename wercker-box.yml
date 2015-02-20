@@ -1,6 +1,6 @@
 name: ansible
 version: 0.0.1
-inherits: wercker/default
+inherits: wercker/default@0.0.2
 type: main
 platform: ubuntu@12.04
 description: "A box create to build, test and deploy ansible-playbook"
