@@ -13,10 +13,11 @@ keywords:
  
 script: |
     # install docekr
-    sudo apt-get update
-    sudo apt-get install linux-image-generic-lts-trusty linux-headers-generic-lts-trusty
+    sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+    sudo apt-get update  
+    sudo apt-get install lxc-docker
     sudo service docker restart
-    
+   
     # install docker-enter
     mkdir -p $WERCKER_CACHE_DIR/bin ; docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
 
