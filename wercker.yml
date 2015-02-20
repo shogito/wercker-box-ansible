@@ -12,9 +12,9 @@ build:
         - script:
             name: install ansible to local
             code: |
-                apt-get update
-                apt-get install python-pip -y
-                pip install ansible -y
+                sudo apt-get update
+                sudo apt-get install python-pip -y
+                sudo pip install ansible -y
 
         - script:
             name: check ansible
