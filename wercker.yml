@@ -2,5 +2,25 @@ box: wercker-labs/docker
 build:
     steps:
         - script:
-            name: list images
-            code: docker images 
+            name: install docker-enter
+            code: mkdir -p $WERCKER_CACHE_DIR/bin ; docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
+
+        - script:
+            name: インストール確認
+            code: test -x $WERCKER_CACHE_DIR/bin/docker-enter
+
+        - script:
+            name: pull centos7-ansible
+            code: docker pull ansible/centos7-ansible
+
+        - script:
+            name: image check
+            code: docker images ansible/centos7-ansible | grep "ansible/centos7-ansible"
+
+        - script:
+            name: pull ubuntu14.04-ansible
+            code: docker pull ansible/ubuntu14.04-ansible
+
+        - script:
+            name: image check
+            code: docker images ansible/ubuntu14.04-ansible | grep "ansible/ubuntu14.04-ansible"
