@@ -15,7 +15,7 @@ script: |
     # install docekr
     sudo apt-get update
     sudo apt-get install linux-image-generic-lts-trusty linux-headers-generic-lts-trusty
-    sudo service docker.io restart
+    sudo service docker restart
     
     # install docker-enter
     mkdir -p $WERCKER_CACHE_DIR/bin ; docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
