@@ -1,6 +1,6 @@
-name: docker-ansible
+name: ansible
 version: 0.0.1
-inherits: wercker-labs/docker
+inherits: wercker/ubuntu12.04-webessentials@1.0.4
 type: main
 platform: ubuntu@12.04
 description: "A box create to build, test and deploy ansible-playbook"
@@ -12,14 +12,21 @@ keywords:
     - docker-enter
  
 script: |
+    # install docekr
+    sudo apt-get update
+    sudo apt-get install apt-transport-https
+    sudo sh -c "echo deb https://get.docker.com/ubuntu docker main > /etc/apt/sources.list.d/docker.list"
+    sudo apt-get update  
+    sudo apt-get install lxc-docker
+    sudo service docker restart
+   
     # install docker-enter
-    mkdir -p $WERCKER_CACHE_DIR/bin ; docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
+    sudo mkdir -p $WERCKER_CACHE_DIR/bin ; sudo docker run --rm -v $WERCKER_CACHE_DIR/bin:/target jpetazzo/nsenter
 
     # check docker-enter
-    test -x $WERCKER_CACHE_DIR/bin/docker-enter
+    sudo test -x $WERCKER_CACHE_DIR/bin/docker-enter
 
     # install ansible to local
-    sudo apt-get update
     sudo apt-get install python-pip -y
     sudo pip install ansible
 
@@ -27,21 +34,22 @@ script: |
     ansible-playbook --version
 
     # pull centos7-ansible
-    docker pull ansible/centos7-ansible
+    sudo docker pull ansible/centos7-ansible
 
     # image check
-    docker images ansible/centos7-ansible | grep "ansible/centos7-ansible"
+    sudo docker images ansible/centos7-ansible | grep "ansible/centos7-ansible"
 
     # check centos7-ansible
-    docker run --rm ansible/centos7-ansible $ANSIBLE_PATH/ansible-playbook --version
+    sudo docker run --rm ansible/centos7-ansible $ANSIBLE_PATH/ansible-playbook --version
 
     # pull ubuntu14.04-ansible
-    docker pull ansible/ubuntu14.04-ansible
+    sudo docker pull ansible/ubuntu14.04-ansible
 
     # image check
-    docker images ansible/ubuntu14.04-ansible | grep "ansible/ubuntu14.04-ansible"
+    sudo docker images ansible/ubuntu14.04-ansible | grep "ansible/ubuntu14.04-ansible"
 
     # check ubuntu14.04-ansible
-    docker run --rm ansible/ubuntu14.04-ansible $ANSIBLE_PATH/ansible-playbook --version
+    sudo docker run --rm ansible/ubuntu14.04-ansible $ANSIBLE_PATH/ansible-playbook --version
 
-
+env:
+    ANSIBLE_PATH: "/opt/ansible/ansible/bin"
