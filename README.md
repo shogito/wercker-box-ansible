@@ -1,8 +1,10 @@
 # wercker-box-ansible
 
+### 注意
+とりあえずうまく動かないので凍結
+
 ### これはなに？
 Werckerでansible-playbooの自動テストを実施するためのBOX
-
 
 ### environment variables
 * ANSIBLE_PATH: /opt/ansible/bin
